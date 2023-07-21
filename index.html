@@ -1,97 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-        function getComputerChoice() {
-            var randomChoice = Math.floor(Math.random() * 3);
-            var computerChoice = "";
+      function getComputerChoice() {
+        var randomChoice = Math.floor(Math.random() * 3);
+        var computerChoice = "";
 
-            // Map the random number to rock, paper, or scissors
-            if(randomChoice == 0) {
-                computerChoice = "rock";
-            } 
-            else if(randomChoice == 1) {
-                computerChoice = "paper";
-            } 
-            else {
-                computerChoice = "scissors";
-            }
-            return computerChoice;
+        // Map the random number to rock, paper, or scissors
+        if (randomChoice == 0) {
+          computerChoice = "rock";
+        } else if (randomChoice == 1) {
+          computerChoice = "paper";
+        } else {
+          computerChoice = "scissors";
+        }
+        return computerChoice;
+      }
+
+      function getUserChoice() {
+        var userChoice = prompt(
+          "Do you choose rock, paper, or scissors?"
+        ).toLowerCase();
+        return userChoice;
+      }
+
+      function determineWinner(userChoice, computerChoice) {
+        if (userChoice === computerChoice) {
+          return "The game is a tie!";
+        }
+        if (userChoice === "rock") {
+          if (computerChoice === "paper") {
+            return "The computer won!";
+          } else {
+            return "You won!";
+          }
+        }
+        if (userChoice === "paper") {
+          if (computerChoice === "scissors") {
+            return "The computer won!";
+          } else {
+            return "You won!";
+          }
+        }
+        if (userChoice === "scissors") {
+          if (computerChoice === "rock") {
+            return "The computer won!";
+          } else {
+            return "You won!";
+          }
+        }
+      }
+
+      function playRound() {
+        var userChoice = getUserChoice();
+        var computerChoice = getComputerChoice();
+        console.log("User has chosen: " + userChoice);
+        console.log("Computer has chosen: " + computerChoice);
+        var winner = determineWinner(userChoice, computerChoice);
+        console.log(winner);
+        return winner;
+      }
+
+      function endRound() {
+        var end = prompt("Do you want to end the game? (y/n)").toLowerCase();
+        if (end === "y") {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      function game() {
+        var userWin = 0;
+        var computerWin = 0;
+        var ties = 0;
+
+        // Play round until user wants to stop
+        var endGame = false;
+        var i = 1;
+        while (!endGame) {
+          console.log("Round " + i + ":");
+          var winner = playRound();
+
+          if (winner === "You won!") {
+            userWin++;
+          } else if (winner === "The computer won!") {
+            computerWin++;
+          } else {
+            ties++;
+          }
+          i++;
+          endGame = endRound();
         }
 
-        function getUserChoice() {
-            var userChoice = prompt("Do you choose rock, paper, or scissors?").toLowerCase();
-            return userChoice;
+        var finalist = "";
+        if (userWin > computerWin) {
+          finalist = "You are the final winner!";
+        } else if (userWin < computerWin) {
+          finalist = "The computer is the final winner!";
+        } else {
+          finalist = "The game is a tie!";
         }
-
-        function determineWinner(userChoice, computerChoice) {
-            if(userChoice === computerChoice) {
-                return "The game is a tie!";
-            } 
-            if(userChoice === "rock") {
-                if(computerChoice === "paper") {
-                    return "The computer won!";
-                } else {
-                    return "You won!";
-                }
-            }
-            if(userChoice === "paper") {
-                if(computerChoice === "scissors") {
-                    return "The computer won!";
-                } else {
-                    return "You won!";
-                }
-            }
-            if(userChoice === "scissors") {
-                if(computerChoice === "rock") {
-                    return "The computer won!";
-                } else {
-                    return "You won!";
-                }
-            }
-        }
-
-        function playRound() {
-            var userChoice = getUserChoice();
-            var computerChoice = getComputerChoice();
-            console.log("User has chosen: " + userChoice);
-            console.log("Computer has chosen: " + computerChoice);
-            var winner = determineWinner(userChoice, computerChoice)
-            console.log(winner);
-            return winner;
-        }
-
-        function game() {
-            var userWin = 0;
-            var computerWin = 0;
-
-            for(i = 0; i < 5; i++) {
-                console.log("Round " + (i + 1) + ":");
-                var winner = playRound();
-
-                if(winner === "You won!") {
-                    userWin++;
-                } else if(winner === "The computer won!") {
-                    computerWin++;
-                } else 
-                    continue;
-            }
-            var finalist = "";
-            if(userWin > computerWin) {
-                finalist = "You are the final winner!";
-            } else if(userWin < computerWin) {
-                finalist = "The computer is the final winner!";
-            } else {
-                finalist = "The game is a tie!";
-            }
-            console.log(finalist + " The user won: " + userWin + " times. The computer won: " + computerWin + " times.");
-        }
-        game();
+        console.log(
+          finalist +
+            "\nThe user won: " +
+            userWin +
+            " times.\nThe computer won: " +
+            computerWin +
+            " times." +
+            "\nThe game was tied: " +
+            ties +
+            " times."
+        );
+      }
+      game();
     </script>
-</body>
+  </body>
 </html>
