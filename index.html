@@ -3,122 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Rock Paper Scissors !?</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <script>
-      function getComputerChoice() {
-        var randomChoice = Math.floor(Math.random() * 3);
-        var computerChoice = "";
+    <h1>It's time to D-D-D-Duel!</h1>
+    <h2>Choose Your Object</h2>
 
-        // Map the random number to rock, paper, or scissors
-        if (randomChoice == 0) {
-          computerChoice = "rock";
-        } else if (randomChoice == 1) {
-          computerChoice = "paper";
-        } else {
-          computerChoice = "scissors";
-        }
-        return computerChoice;
-      }
+    <!-- Add three buttons, one for rock, one for paper, and another for scissors-->
+    <div class="objectBtn">
+      <button id="rock">Rock</button>
+      <button id="paper">Paper</button>
+      <button id="scissors">Scissors</button>
+    </div>
 
-      function getUserChoice() {
-        var userChoice = prompt(
-          "Do you choose rock, paper, or scissors?"
-        ).toLowerCase();
-        return userChoice;
-      }
+    <!-- Add a score board that shows how many times the player has won and the computer has won.-->
+    <div class="scoreBoard">
+      <h3>Player Score: <span id="playerScore"></span></h3>
+      <h3>Computer Score: <span id="computerScore"></span></h3>
+    </div>
 
-      function determineWinner(userChoice, computerChoice) {
-        if (userChoice === computerChoice) {
-          return "The game is a tie!";
-        }
-        if (userChoice === "rock") {
-          if (computerChoice === "paper") {
-            return "The computer won!";
-          } else {
-            return "You won!";
-          }
-        }
-        if (userChoice === "paper") {
-          if (computerChoice === "scissors") {
-            return "The computer won!";
-          } else {
-            return "You won!";
-          }
-        }
-        if (userChoice === "scissors") {
-          if (computerChoice === "rock") {
-            return "The computer won!";
-          } else {
-            return "You won!";
-          }
-        }
-      }
+    <!-- Add a div for the actual scores -->
+    <div class="scores">
+      <div id="userPoints"></div>
+      <div id="computerPoints"></div>
+    </div>
 
-      function playRound() {
-        var userChoice = getUserChoice();
-        var computerChoice = getComputerChoice();
-        console.log("User has chosen: " + userChoice);
-        console.log("Computer has chosen: " + computerChoice);
-        var winner = determineWinner(userChoice, computerChoice);
-        console.log(winner);
-        return winner;
-      }
+    <!-- Add a div for the results of each round -->
+    <div><span id="results">Results</span></div>
+    <div id="roundResults"></div>
 
-      function endRound() {
-        var end = prompt("Do you want to end the game? (y/n)").toLowerCase();
-        if (end === "y") {
-          return true;
-        } else {
-          return false;
-        }
-      }
-
-      function game() {
-        var userWin = 0;
-        var computerWin = 0;
-        var ties = 0;
-
-        // Play round until user wants to stop
-        var endGame = false;
-        var i = 1;
-        while (!endGame) {
-          console.log("Round " + i + ":");
-          var winner = playRound();
-
-          if (winner === "You won!") {
-            userWin++;
-          } else if (winner === "The computer won!") {
-            computerWin++;
-          } else {
-            ties++;
-          }
-          i++;
-          endGame = endRound();
-        }
-
-        var finalist = "";
-        if (userWin > computerWin) {
-          finalist = "You are the final winner!";
-        } else if (userWin < computerWin) {
-          finalist = "The computer is the final winner!";
-        } else {
-          finalist = "The game is a tie!";
-        }
-        console.log(
-          finalist +
-            "\nThe user won: " +
-            userWin +
-            " times.\nThe computer won: " +
-            computerWin +
-            " times." +
-            "\nThe game was tied: " +
-            ties +
-            " times."
-        );
-      }
-      game();
-    </script>
+    <!-- Add a button for the user to reset the game and play again -->
+    <div>
+      <button id="reset">Play Again!</button>
+    </div>
   </body>
+  <script src="script.js"></script>
 </html>
