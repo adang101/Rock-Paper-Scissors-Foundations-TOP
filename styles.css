@@ -3,6 +3,16 @@ html {
   background-size: cover;
 }
 
+.flex {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding-top: 20px;
+}
+
 body,
 html {
   height: 100%;
